@@ -11,7 +11,7 @@
 :- use_module(library(error)).
 :- use_module(library(prolog_stack)).
 
-:- use_module('src/core/logger/logger.pro').
+:- use_module('src/core/loggers/logger.pro').
 
 getServiceDictValue(ServiceDict, KeyString, Value):-
     atom_string(KeyString, KeyAtom),

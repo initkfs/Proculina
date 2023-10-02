@@ -9,11 +9,10 @@
 
 :- use_module(library(optparse)).
 :- use_module(library(yaml)).
-:- use_module(library(statistics)).
 
-:- use_module('src/core/app/exceptions.pro').
-:- use_module('src/core/logger/logger.pro').
-:- use_module('src/core/util/io_util.pro').
+:- use_module('src/core/apps/exceptions.pro').
+:- use_module('src/core/loggers/logger.pro').
+:- use_module('src/core/utils/io_util.pro').
 
 appVersion("0.1a").
 appDocBrouserPort(5050).

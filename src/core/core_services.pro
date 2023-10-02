@@ -5,7 +5,12 @@
     setConfig/1, 
     getConfigValue/2, 
     setI18n/1, 
-    getI18nValue/2
+    getI18nValue/2,
+    logDebug/1,
+    logWarn/1,
+    logError/1,
+    logInfo/1,
+    logTrace/1
 ]).
 
 :- use_module(library(error)).
@@ -13,8 +18,7 @@
 
 :- use_module('src/core/loggers/logger.pro').
 
-getServiceDictValue(ServiceDict, KeyString, Value):-
-    atom_string(KeyString, KeyAtom),
+getServiceDictValue(ServiceDict, KeyAtom, Value):-
     Value = ServiceDict.get(KeyAtom).
 
 isConfig:-
@@ -25,9 +29,9 @@ setConfig(Config):-
     throw(error(instantiation_error("The config is already installed"), context(_, _)));
     assertz(mainConfig(Config)).
 
-getConfigValue(KeyString, ConfigValue):-
+getConfigValue(KeyString, ConfigValueAtom):-
     mainConfig(Config),
-    getServiceDictValue(Config, KeyString, ConfigValue).
+    getServiceDictValue(Config, KeyString, ConfigValueAtom).
 
 isI18n:-
     current_predicate(i18n/1).

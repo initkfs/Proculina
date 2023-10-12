@@ -21,11 +21,11 @@
 getServiceDictValue(ServiceDict, KeyAtom, Value):-
     Value = ServiceDict.get(KeyAtom).
 
-isConfig:-
+hasConfig:-
     current_predicate(mainConfig/1).
 
 setConfig(Config):-
-    isConfig,
+    hasConfig,
     throw(error(instantiation_error("The config is already installed"), context(_, _)));
     assertz(mainConfig(Config)).
 
@@ -33,11 +33,11 @@ getConfigValue(KeyString, ConfigValueAtom):-
     mainConfig(Config),
     getServiceDictValue(Config, KeyString, ConfigValueAtom).
 
-isI18n:-
+hasI18n:-
     current_predicate(i18n/1).
 
 setI18n(I18n):-
-    isI18n,
+    hasI18n,
     throw(error(instantiation_error("The I18N is already installed"), context(_, _)));
     assertz(i18n(I18n)).
 
@@ -45,11 +45,11 @@ getI18nValue(KeyString, Value):-
     i18n(I18n),
     getServiceDictValue(I18n, KeyString, Value).
 
-isLogger:-
+hasLogger:-
     current_predicate(mainLogger/1).
 
 setLogger(Logger):-
-    isI18n,
+    hasI18n,
     throw(error(instantiation_error("The logger is already installed"), context(_, _)));
     assertz(mainLogger(Logger)).
 

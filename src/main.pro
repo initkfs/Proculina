@@ -97,6 +97,7 @@ loadConfig(Config):-
     loadYamlResource(ConfigFilePath, Config).
 
 main(Argv) :-
+    %set_prolog_flag(double_quotes, chars),
     cliOptSpec(Spec),
     optparse:opt_parse(Spec, Argv, Opts, _),
 
@@ -114,6 +115,7 @@ main(Argv) :-
     core_services:getConfigValue(appCurrentLanguage, CurrentLanguage),
     loadI18nResources(CurrentLanguage, I18n),
     core_services:setI18n(I18n),
+    !,
     
     processCli(Opts, Logger, Config, I18n);
     writeln("Nothing to do. Exit."),

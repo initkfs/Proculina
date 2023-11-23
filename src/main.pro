@@ -69,7 +69,7 @@ cliOptSpec([
 
     [opt(cliCommandFlag), 
         type(atom), 
-        default('command'),
+        default(''),
         shortflags([c]), 
         longflags([command]), 
         help('Natural language command for interpretation.')

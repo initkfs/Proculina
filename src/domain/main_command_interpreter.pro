@@ -12,8 +12,9 @@
 
 :- use_module('databases/ru/ingredients.pro').
 
+%{ re_match("[прокулина | proculina ][,]?"/i,Name)})
 request --> ([proculina] ; [прокулина]), (string(_) ; []).
-weight --> [сколько] ; [количество] ; [вес] ; [масса].
+weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
 in --> [в].
 weightSpoonIncreased --> [с], ([горкой] ; [горочкой]; [верхом]).
 weightInSpoon1(X) --> request, weight, in, ([ложке] ; [ложечке]), [X].
@@ -23,7 +24,8 @@ weightInSpoonInc(X) --> weightInSpoon(X), weightSpoonIncreased.
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
-    re_replace("ё", "е", LowerCommand, Command),
+    re_replace("ё", "е", LowerCommand, ReplacedCommand),
+    re_replace(",", "", ReplacedCommand, Command),
 
     format(string(ReceiveCommandMessage), "Received command for parsing: '~s'", Command),
     core_services:logDebug(ReceiveCommandMessage),

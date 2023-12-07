@@ -22,6 +22,8 @@ weightInSpoon2(X) --> request, weight, ([ложка]; [ложечка]), ([со�
 weightInSpoon(X) -->  weightInSpoon1(X) ; weightInSpoon2(X).
 weightInSpoonInc(X) --> weightInSpoon(X), weightSpoonIncreased.
 
+weightInSpoonQuantity(X, Quantity) --> request, weight, in, [Quantity], ([ложках] ; [ложечках]), [X].
+
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
     re_replace("ё", "е", LowerCommand, ReplacedCommand),
@@ -51,5 +53,14 @@ parseCommand(_, WordsList, ResultString):-
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГраммГорка(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке с горкой %w грамм %w\n", [ВесГрамм, РодПадеж]);
+
+    phrase(weightInSpoonQuantity(X, КоличествоАтом), WordsList),
+    core_services:logDebug("Run weight in spoon quantity command"),
+    импадеж(X, ИмПадеж),
+    родпадеж(ИмПадеж, РодПадеж),
+    вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
+    ingredients:количествоВ(КоличествоЧислоАтом, КоличествоАтом),
+    ВесИтог is КоличествоЧислоАтом * ВесГрамм,
+    swritef(ResultString, "В %w столовых ложках %w грамм %w\n", [КоличествоАтом, ВесИтог, РодПадеж]);
 
     writeln("Invalid command for parsing").

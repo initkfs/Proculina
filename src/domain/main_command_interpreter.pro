@@ -10,7 +10,8 @@
 :- use_module('./../core/utils/collection_util.pro').
 :- use_module('main_data_processor.pro').
 
-:- use_module('databases/ru/ingredients.pro').
+:- use_module('db/ingredients.pro').
+:- use_module('controllers/quantity_controller.pro').
 
 %{ re_match("[прокулина | proculina ][,]?"/i,Name)})
 request --> ([proculina] ; [прокулина]), (string(_) ; []).
@@ -59,8 +60,8 @@ parseCommand(_, WordsList, ResultString):-
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    ingredients:количествоВ(КоличествоЧислоАтом, КоличествоАтом),
+    quantity_controller:wordToQuantity(КоличествоАтом, КоличествоЧислоАтом),
     ВесИтог is КоличествоЧислоАтом * ВесГрамм,
     swritef(ResultString, "В %w столовых ложках %w грамм %w\n", [КоличествоАтом, ВесИтог, РодПадеж]);
 
-    writeln("Invalid command for parsing").
+    writeln("Я не понимаю этот вопрос").

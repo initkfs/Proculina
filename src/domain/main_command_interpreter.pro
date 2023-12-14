@@ -25,6 +25,12 @@ weightInSpoonInc(X) --> weightInSpoon(X), weightSpoonIncreased.
 
 weightInSpoonQuantity(X, Quantity) --> request, weight, in, [Quantity], ([ложках] ; [ложечках]), [X].
 
+iam --> [я].
+not --> [не].
+understand --> {random_member(X, [понимаю, 'могу разобрать', 'могу понять', знаю])}, [X].
+thisquestion --> [этот], [вопрос].
+quastionNotCorrect --> iam, not, understand, thisquestion.
+
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
     re_replace("ё", "е", LowerCommand, ReplacedCommand),
@@ -64,4 +70,5 @@ parseCommand(_, WordsList, ResultString):-
     ВесИтог is КоличествоЧислоАтом * ВесГрамм,
     swritef(ResultString, "В %w столовых ложках %w грамм %w\n", [КоличествоАтом, ВесИтог, РодПадеж]);
 
-    writeln("Я не понимаю этот вопрос").
+    phrase(quastionNotCorrect, AnswerList),
+    atomic_list_concat(AnswerList, " ", ResultString).

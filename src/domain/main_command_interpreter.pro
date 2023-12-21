@@ -13,23 +13,8 @@
 :- use_module('db/ingredients.pro').
 :- use_module('controllers/quantity_controller.pro').
 
-%{ re_match("[прокулина | proculina ][,]?"/i,Name)})
-request --> ([proculina] ; [прокулина]), (string(_) ; []).
-weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
-in --> [в].
-weightSpoonIncreased --> [с], ([горкой] ; [горочкой]; [верхом]).
-weightInSpoon1(X) --> request, weight, in, ([ложке] ; [ложечке]), [X].
-weightInSpoon2(X) --> request, weight, ([ложка]; [ложечка]), ([содержит] ; [вмещает] ; [несет]), [X].
-weightInSpoon(X) -->  weightInSpoon1(X) ; weightInSpoon2(X).
-weightInSpoonInc(X) --> weightInSpoon(X), weightSpoonIncreased.
-
-weightInSpoonQuantity(X, Quantity) --> request, weight, in, [Quantity], ([ложках] ; [ложечках]), [X].
-
-iam --> [я].
-not --> [не].
-understand --> {random_member(X, [понимаю, 'могу разобрать', 'могу понять', знаю])}, [X].
-thisquestion --> [этот], [вопрос].
-quastionNotCorrect --> iam, not, understand, thisquestion.
+:- use_module('speech/me.pro').
+:- use_module('speech/weight.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
@@ -47,21 +32,21 @@ interpretCommand(MustBeCommand, ResultString):-
     false.
 
 parseCommand(_, WordsList, ResultString):-
-    phrase(weightInSpoon(X), WordsList),
+    phrase(weight:weightInSpoon(X), WordsList),
     core_services:logDebug("Run weight in spoon command"),
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке %w грамм %w\n", [ВесГрамм, РодПадеж]);
 
-    phrase(weightInSpoonInc(X), WordsList),
+    phrase(weight:weightInSpoonInc(X), WordsList),
     core_services:logDebug("Run increased weight in spoon command"),
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГраммГорка(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке с горкой %w грамм %w\n", [ВесГрамм, РодПадеж]);
 
-    phrase(weightInSpoonQuantity(X, КоличествоАтом), WordsList),
+    phrase(weight:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
     core_services:logDebug("Run weight in spoon quantity command"),
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
@@ -70,5 +55,5 @@ parseCommand(_, WordsList, ResultString):-
     ВесИтог is КоличествоЧислоАтом * ВесГрамм,
     swritef(ResultString, "В %w столовых ложках %w грамм %w\n", [КоличествоАтом, ВесИтог, РодПадеж]);
 
-    phrase(quastionNotCorrect, AnswerList),
+    phrase(me:quastionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).

@@ -28,8 +28,7 @@ interpretCommand(MustBeCommand, ResultString):-
 
     parseCommand(Command, WordsList, ResultString);
     core_services:logDebug("Received invalid command"),
-    ResultString = "",
-    false.
+    ResultString = "".
 
 parseCommand(_, WordsList, ResultString):-
     phrase(weight:weightInSpoon(X), WordsList),
@@ -37,14 +36,14 @@ parseCommand(_, WordsList, ResultString):-
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В столовой ложке %w грамм %w\n", [ВесГрамм, РодПадеж]);
+    swritef(ResultString, "В столовой ложке %w грамм %w", [ВесГрамм, РодПадеж]);
 
     phrase(weight:weightInSpoonInc(X), WordsList),
     core_services:logDebug("Run increased weight in spoon command"),
     импадеж(X, ИмПадеж),
     родпадеж(ИмПадеж, РодПадеж),
     вСтоловойЛожкеГраммГорка(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В столовой ложке с горкой %w грамм %w\n", [ВесГрамм, РодПадеж]);
+    swritef(ResultString, "В столовой ложке с горкой %w грамм %w", [ВесГрамм, РодПадеж]);
 
     phrase(weight:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
     core_services:logDebug("Run weight in spoon quantity command"),
@@ -53,7 +52,7 @@ parseCommand(_, WordsList, ResultString):-
     вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     quantity_controller:wordToQuantity(КоличествоАтом, КоличествоЧислоАтом),
     ВесИтог is КоличествоЧислоАтом * ВесГрамм,
-    swritef(ResultString, "В %w столовых ложках %w грамм %w\n", [КоличествоАтом, ВесИтог, РодПадеж]);
+    swritef(ResultString, "В %w столовых ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
 
     phrase(me:quastionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).

@@ -9,7 +9,7 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./me.pro').
+:- use_module('./interact.pro').
 
 weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
 in --> [в].
@@ -20,15 +20,15 @@ contains -->  ([содержит] ; [вмещает] ; [несет]).
 weightSpoonIncreased --> [с], ([горкой] ; [горочкой]; [верхом]).
 
 %масса в ложке X
-weightInSpoonX(X) --> me:request, weight, in, inSpoon, [X].
+weightInSpoonX(X) --> interact:request, weight, in, inSpoon, [X].
 
 %сколько ложка содержит X
-weightSpoonContains(X) --> me:request, weight, spoon, contains, [X].
+weightSpoonContains(X) --> interact:request, weight, spoon, contains, [X].
 %сколько содержит ложка X
-weightContainsSpoon(X) --> me:request, weight, contains, spoon, [X].
+weightContainsSpoon(X) --> interact:request, weight, contains, spoon, [X].
 
 %масса X в ложке
-weightXInSpoon(X) --> me:request, weight, [X], in, inSpoon.
+weightXInSpoon(X) --> interact:request, weight, [X], in, inSpoon.
 
 weightInSpoon(X) -->  
     weightInSpoonX(X); 
@@ -38,4 +38,4 @@ weightInSpoon(X) -->
 
 weightInSpoonInc(X) --> weightInSpoon(X), weightSpoonIncreased.
 
-weightInSpoonQuantity(X, Quantity) --> me:request, weight, in, [Quantity], ([ложках] ; [ложечках]), [X].
+weightInSpoonQuantity(X, Quantity) --> interact:request, weight, in, [Quantity], ([ложках] ; [ложечках]), [X].

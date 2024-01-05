@@ -1,9 +1,9 @@
 /** <module> Main command interpreter
 @author initkfs
 */
-:- module(me, [
+:- module(interact, [
     request/2,
-    quastionNotCorrect/2
+    questionNotCorrect/2
 ]).
 
 :- use_module(library(dcg/basics)).
@@ -15,4 +15,4 @@ iam --> [я].
 not --> [не].
 understand --> {random_member(X, [понимаю, 'могу разобрать', 'могу понять', знаю])}, [X].
 thisquestion --> [этот], [вопрос].
-quastionNotCorrect --> iam, not, understand, thisquestion.
+questionNotCorrect --> iam, not, understand, thisquestion.

@@ -3,7 +3,8 @@
 */
 :- module(quantity_controller, [
     wordToQuantity/3,
-    wordToQuantity/2
+    wordToQuantity/2,
+    weightFromWordQuantity/3
 ]).
 
 :- use_module('./../db/quantity.pro').
@@ -17,3 +18,7 @@ wordToQuantity(QuantityWord, QuantityNumber, Goal):-
     ListLen > 0,
     nth0(0, ResultList, QuantityData),
     nth0(0, QuantityData, QuantityNumber).
+
+weightFromWordQuantity(QuantityWord, WeightNumber, ResultWeightNumber):-
+    wordToQuantity(QuantityWord, QuantityNumber),
+    ResultWeightNumber is QuantityNumber * WeightNumber.

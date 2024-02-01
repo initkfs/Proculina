@@ -9,7 +9,7 @@
 :- use_module('./../core/core_services.pro').
 :- use_module('./../core/utils/collection_util.pro').
 :- use_module('main_data_processor.pro').
-:- use_module('psy/incoming.pro').
+:- use_module('mind/incoming.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),

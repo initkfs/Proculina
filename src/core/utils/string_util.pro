@@ -15,7 +15,8 @@ createStringBuffer(StringBuffer, Stream):-
 
 closeAndReadStringBuffer(Output, StringBuffer, Stream):-
     close(Stream),
-    memfile:memory_file_to_string(StringBuffer, Output).
+    memfile:memory_file_to_string(StringBuffer, Output),
+    memfile:free_memory_file(StringBuffer).
 
 capitalize(Input, Output):-
     atom_chars(Input, [FirstCharLow|Tail]),

@@ -17,35 +17,36 @@
 :- use_module('controllers/weight_glass_controller.pro').
 
 :- use_module('speech/interact.pro').
-:- use_module('speech/weight.pro').
+:- use_module('speech/weights/weight_spoon_speech.pro').
+:- use_module('speech/weights/weight_glass_speech.pro').
 
 parseCommand(_, WordsList, ResultString):-
-    phrase(weight:weightInSpoon(X), WordsList),
+    phrase(weight_spoon_speech:weightInSpoon(X), WordsList),
     core_services:logDebug("Run weight in spoon command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке %w грамм %w", [ВесГрамм, РодПадеж]);
 
-    phrase(weight:weightInSpoonInc(X), WordsList),
+    phrase(weight_spoon_speech:weightInSpoonInc(X), WordsList),
     core_services:logDebug("Run increased weight in spoon command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     weight_spoons_controller:вСтоловойЛожкеГраммГорка(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке с горкой %w грамм %w", [ВесГрамм, РодПадеж]);
 
-    phrase(weight:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
+    phrase(weight_spoon_speech:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
     core_services:logDebug("Run weight in spoon quantity command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
     swritef(ResultString, "В %w столовых ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
 
-    phrase(weight:weightInGlass(X), WordsList),
+    phrase(weight_glass_speech:weightInGlass(X), WordsList),
     core_services:logDebug("Run weight in glass command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В стакане %w грамм %w", [ВесГрамм, РодПадеж]);
 
-    phrase(weight:weightInGlassQuantity(X, КоличествоАтом), WordsList),
+    phrase(weight_glass_speech:weightInGlassQuantity(X, КоличествоАтом), WordsList),
     core_services:logDebug("Run weight in glass quantity command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),

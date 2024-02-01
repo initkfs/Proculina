@@ -14,6 +14,7 @@
 :- use_module('controllers/ingredients_controller.pro').
 :- use_module('controllers/quantity_controller.pro').
 :- use_module('controllers/weight_spoons_controller.pro').
+:- use_module('controllers/weight_glass_controller.pro').
 
 :- use_module('speech/interact.pro').
 :- use_module('speech/weight.pro').
@@ -37,6 +38,19 @@ parseCommand(_, WordsList, ResultString):-
     weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
     swritef(ResultString, "В %w столовых ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
+
+    phrase(weight:weightInGlass(X), WordsList),
+    core_services:logDebug("Run weight in glass command"),
+    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
+    weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),
+    swritef(ResultString, "В стакане %w грамм %w", [ВесГрамм, РодПадеж]);
+
+    phrase(weight:weightInGlassQuantity(X, КоличествоАтом), WordsList),
+    core_services:logDebug("Run weight in glass quantity command"),
+    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
+    weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),
+    quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
+    swritef(ResultString, "В %w стаканах %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
 
     phrase(interact:questionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).

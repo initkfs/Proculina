@@ -51,9 +51,9 @@ weightInContainer(X, InContainerRule) -->
     weightInContainerX(X, InContainerRule); 
     weightXInContainer(X, InContainerRule); 
     inContainerXweight(X, InContainerRule); 
-    inContainerWeightX(X, InContainerRule),
-    xWeightInContainer(X, InContainerRule),
-    xInContainerWeight(X, InContainerRule),
-    weightContainerContains(X, InContainerRule),
-    weightContainsContainer(X, InContainerRule),
+    inContainerWeightX(X, InContainerRule);
+    xWeightInContainer(X, InContainerRule);
+    xInContainerWeight(X, InContainerRule);
+    weightContainerContains(X, InContainerRule);
+    weightContainsContainer(X, InContainerRule);
     weightContainsContainer(X, InContainerRule).

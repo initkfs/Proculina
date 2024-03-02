@@ -12,8 +12,9 @@
 :- use_module('./../interact.pro').
 :- use_module('./speech_weight.pro').
 
-spoon --> ([ложка] ; [ложечка]).
-inSpoon --> ([ложке] ; [ложечке]).
+%spoon --> ([ложка] ; [ложечка]).
+%TODO not correct, but simplify
+inSpoon --> ([ложка]; [ложке] ; [ложечка]; [ложечке]).
 inSpoons --> ([ложках] ; [ложечках]).
 
 weightInSpoon(X) -->  

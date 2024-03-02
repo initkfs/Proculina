@@ -14,24 +14,14 @@
 
 spoon --> ([ложка] ; [ложечка]).
 inSpoon --> ([ложке] ; [ложечке]).
-
-%масса в ложке X
-weightInSpoonX(X) --> interact:request, speech_weight:weight, speech_weight:in, inSpoon, [X].
-
-%сколько ложка содержит X
-weightSpoonContains(X) --> interact:request, speech_weight:weight, spoon, speech_weight:contains, [X].
-%сколько содержит ложка X
-weightContainsSpoon(X) --> interact:request, speech_weight:weight, speech_weight:contains, spoon, [X].
-
-%масса X в ложке
-weightXInSpoon(X) --> interact:request, speech_weight:weight, [X], speech_weight:in, inSpoon.
+inSpoons --> ([ложках] ; [ложечках]).
 
 weightInSpoon(X) -->  
-    weightInSpoonX(X); 
-    weightSpoonContains(X); 
-    weightContainsSpoon(X); 
-    weightXInSpoon(X).
+    speech_weight:weightInContainer(X, weight_spoon_speech:inSpoon).
 
 weightInSpoonInc(X) --> weightInSpoon(X), speech_weight:weightIncreased.
 
-weightInSpoonQuantity(X, Quantity) --> interact:request, speech_weight:weight, speech_weight:in, [Quantity], ([ложках] ; [ложечках]), [X].
+%масса в [Quantity] ложках X
+weightInSpoonQuantity(X, Quantity) --> interact:request, speech_weight:weight, speech_weight:in, [Quantity], inSpoons, [X].
+%масса X в [Quantity] ложках
+weightInSpoonQuantity(X, Quantity) --> interact:request, speech_weight:weight, [X],speech_weight:in, [Quantity], inSpoons.

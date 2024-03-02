@@ -62,8 +62,16 @@ cliOptSpec([
         shortflags([c]), 
         longflags([command]), 
         help('Natural language command for interpretation.')
-    ]
+    ],
 
+    %Domain commands
+    [opt(cliPermutationsFlag), 
+        type(atom), 
+        default(''),
+        shortflags([p]), 
+        longflags([perm]), 
+        help('Generate permutations to simplify testing.')
+    ]
 ]).
 
 main(Argv) :-
@@ -90,6 +98,11 @@ processCli(Opts, _, _, _):-
     memberchk(cliRunTestsFlag(true), Opts), 
     run_tests, 
     exit;
+
+    % FIXME flags
+    % memberchk(cliPermutationsFlag(Command), Opts),
+    % main_command_interpreter:writelnPermutations(Command),
+    % exit;
 
     memberchk(cliCommandFlag(Command), Opts),
     main_command_interpreter:interpretCommand(Command, ResultString),

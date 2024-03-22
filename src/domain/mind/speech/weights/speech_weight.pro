@@ -28,24 +28,24 @@ in --> [в].
 contains -->  ([содержит] ; [вмещает] ; [несет]).
 
 %масса в контейнере X
-weightInContainerX(X, InContainerRule) --> interact:request, weight, in, InContainerRule, [X].
+weightInContainerX(X, InContainerRule) --> weight, in, InContainerRule, [X].
 %масса X в контейнере
-weightXInContainer(X, InContainerRule) --> interact:request, weight, [X], in, InContainerRule.
+weightXInContainer(X, InContainerRule) --> weight, [X], in, InContainerRule.
 %X масса в контейнере
-xWeightInContainer(X, InContainerRule) --> interact:request, [X], weight, in, InContainerRule.
+xWeightInContainer(X, InContainerRule) --> [X], weight, in, InContainerRule.
 %X в контейнере масса
-xInContainerWeight(X, InContainerRule) --> interact:request, [X], in, InContainerRule, weight.
+xInContainerWeight(X, InContainerRule) --> [X], in, InContainerRule, weight.
 %в контейнере X масса
-inContainerXweight(X, InContainerRule) --> interact:request, in, InContainerRule, [X], weight.
+inContainerXweight(X, InContainerRule) --> in, InContainerRule, [X], weight.
 %в контейнере масса X
-inContainerWeightX(X, InContainerRule) --> interact:request, in, InContainerRule, weight, [X].
+inContainerWeightX(X, InContainerRule) --> in, InContainerRule, weight, [X].
 
 %сколько контейнер содержит X
-weightContainerContains(X, InContainerRule) --> interact:request, weight, InContainerRule, contains, [X].
+weightContainerContains(X, InContainerRule) --> weight, InContainerRule, contains, [X].
 %сколько содержит контейнер X
-weightContainsContainer(X, InContainerRule) --> interact:request, weight, contains, InContainerRule, [X].
+weightContainsContainer(X, InContainerRule) --> weight, contains, InContainerRule, [X].
 %сколько X содержит контейнер
-weightContainsContainer(X, InContainerRule) --> interact:request, weight, [X], contains, InContainerRule.
+weightContainsContainer(X, InContainerRule) --> weight, [X], contains, InContainerRule.
 
 weightInContainer(X, InContainerRule) -->  
     weightInContainerX(X, InContainerRule); 

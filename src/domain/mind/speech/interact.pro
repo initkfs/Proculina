@@ -2,14 +2,13 @@
 @author initkfs
 */
 :- module(interact, [
-    request/2,
     questionNotCorrect/2
 ]).
 
 :- use_module(library(dcg/basics)).
 
 %{ re_match("[прокулина | proculina ][,]?"/i,Name)})
-request --> ([proculina] ; [прокулина]), (string(_) ; []).
+%request --> ([proculina] ; [прокулина]), (string(_) ; []).
 
 iam --> [я].
 not --> [не].

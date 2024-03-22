@@ -3,7 +3,6 @@
 */
 :- module(weight_spoon_speech, [
     weightInSpoon/3,
-    weightInSpoonInc/3,
     weightInSpoonQuantity/4
 ]).
 
@@ -19,8 +18,6 @@ inSpoons --> ([ложках] ; [ложечках]).
 
 weightInSpoon(X) -->  
     speech_weight:weightInContainer(X, weight_spoon_speech:inSpoon).
-
-weightInSpoonInc(X) --> weightInSpoon(X), speech_weight:weightIncreased.
 
 %масса в [Quantity] ложках X
 weightInSpoonQuantity(X, Quantity) --> speech_weight:weight, speech_weight:in, [Quantity], inSpoons, [X].

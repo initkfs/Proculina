@@ -3,7 +3,6 @@
 */
 :- module(speech_weight, [
     weight/2,
-    weightIncreased/2,
     in/2,
     contains/2,
     weightInContainer/4,
@@ -23,7 +22,6 @@
 :- use_module('./../interact.pro').
 
 weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
-weightIncreased --> [с], ([горкой] ; [горочкой]; [верхом]).
 in --> [в].
 contains -->  ([содержит] ; [вмещает] ; [несет]).
 

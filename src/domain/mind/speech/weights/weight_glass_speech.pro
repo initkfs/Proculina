@@ -12,23 +12,9 @@
 :- use_module('./speech_weight.pro').
 
 glass --> ([стакан] ; [стаканчик]).
-inGlass --> ([стакане] ; [стаканчике]).
-
-%масса в стакане X
-weightInGlassX(X) --> speech_weight:weight, speech_weight:in, inGlass, [X].
-
-%сколько стакан содержит X
-weightGlassContains(X) --> speech_weight:weight, glass, speech_weight:contains, [X].
-%сколько содержит стакан X
-weightContainsGlass(X) --> speech_weight:weight, speech_weight:contains, glass, [X].
-
-%масса X в стакане
-weightXInGlass(X) --> speech_weight:weight, [X], speech_weight:in, inGlass.
+inGlass --> ([стакан]; [стакане] ; [стаканчик]; [стаканчике]).
 
 weightInGlass(X) -->  
-    weightInGlassX(X); 
-    weightGlassContains(X); 
-    weightContainsGlass(X); 
-    weightXInGlass(X).
+    speech_weight:weightInContainer(X, weight_glass_speech:inGlass).
 
 weightInGlassQuantity(X, Quantity) --> speech_weight:weight, speech_weight:in, [Quantity], ([стаканах] ; [стаканчиках]), [X].

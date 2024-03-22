@@ -27,12 +27,6 @@ parseCommand(_, WordsList, ResultString):-
     weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
     swritef(ResultString, "В столовой ложке %w грамм %w", [ВесГрамм, РодПадеж]);
 
-    phrase(weight_spoon_speech:weightInSpoonInc(X), WordsList),
-    core_services:logDebug("Run increased weight in spoon command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_spoons_controller:вСтоловойЛожкеГраммГорка(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В столовой ложке с горкой %w грамм %w", [ВесГрамм, РодПадеж]);
-
     phrase(weight_spoon_speech:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
     core_services:logDebug("Run weight in spoon quantity command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),

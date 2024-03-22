@@ -49,7 +49,7 @@ hasLogger:-
     current_predicate(mainLogger/1).
 
 setLogger(Logger):-
-    hasI18n,
+    hasLogger,
     throw(error(instantiation_error("The logger is already installed"), context(_, _)));
     assertz(mainLogger(Logger)).
 

@@ -13,13 +13,12 @@
 
 %spoon --> ([ложка] ; [ложечка]).
 %TODO not correct, but simplify
-inSpoon --> ([ложка]; [ложке] ; [ложечка]; [ложечке]).
-inSpoons --> ([ложках] ; [ложечках]).
+inSpoon --> [ложка]; [ложке] ; [ложечка]; [ложечке].
+inSpoons --> [ложках] ; [ложечках].
+inSpoonQuantity(Quantity) --> 
+    ([Quantity], inSpoons) ; (inSpoons, [Quantity]).
 
 weightInSpoon(X) -->  
     speech_weight:weightInContainer(X, weight_spoon_speech:inSpoon).
 
-%масса в [Quantity] ложках X
-weightInSpoonQuantity(X, Quantity) --> speech_weight:weight, speech_weight:in, [Quantity], inSpoons, [X].
-%масса X в [Quantity] ложках
-weightInSpoonQuantity(X, Quantity) --> speech_weight:weight, [X],speech_weight:in, [Quantity], inSpoons.
+weightInSpoonQuantity(X, Quantity) --> speech_weight:weightInContainer(X, weight_spoon_speech:inSpoonQuantity(Quantity)).

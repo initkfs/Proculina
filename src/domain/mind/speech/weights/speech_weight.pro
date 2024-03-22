@@ -23,7 +23,7 @@
 
 weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
 in --> [в].
-contains -->  ([содержит] ; [вмещает] ; [несет]).
+contains -->  [содержит] ; [вмещает] ; [несет].
 
 %масса в контейнере X
 weightInContainerX(X, InContainerRule) --> weight, in, InContainerRule, [X].

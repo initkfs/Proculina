@@ -11,10 +11,12 @@
 :- use_module('./../interact.pro').
 :- use_module('./speech_weight.pro').
 
-glass --> ([стакан] ; [стаканчик]).
-inGlass --> ([стакан]; [стакане] ; [стаканчик]; [стаканчике]).
+inGlass --> [стакан]; [стакане] ; [стаканчик]; [стаканчике].
+inGlasses --> ([стаканы]; [стаканах]).
+inGlassesQuantity(Quantity) --> 
+    ([Quantity], inGlasses) ; (inGlasses, [Quantity]).
 
 weightInGlass(X) -->  
     speech_weight:weightInContainer(X, weight_glass_speech:inGlass).
 
-weightInGlassQuantity(X, Quantity) --> speech_weight:weight, speech_weight:in, [Quantity], ([стаканах] ; [стаканчиках]), [X].
+weightInGlassQuantity(X, Quantity) -->  speech_weight:weightInContainer(X, weight_glass_speech:inGlassesQuantity(Quantity)).

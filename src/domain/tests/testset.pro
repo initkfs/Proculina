@@ -7,15 +7,14 @@
 :- set_prolog_flag(verbose, silent).
 :- initialization(main).
 
-:- use_module('core/core_services.pro').
-:- use_module('core/loggers/logger.pro').
-:- use_module('app.pro').
+:- use_module('./../../core/core_services.pro').
+:- use_module('./../../core/loggers/logger.pro').
+:- use_module('./../../app.pro').
 
-:- use_module('domain/main_command_interpreter.pro').
+:- use_module('./../main_command_interpreter.pro').
 
 testPhrase(Phrase, ExpectedResult):-
     main_command_interpreter:interpretCommand(Phrase, CmdResult),
-    format("send '~s', received: '~s'\n", [Phrase, CmdResult]),
     CmdResult = ExpectedResult;
     format("FAIL '~s'\n", [Phrase]), !.
 

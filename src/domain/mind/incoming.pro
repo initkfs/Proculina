@@ -15,12 +15,22 @@
 :- use_module('controllers/quantity_controller.pro').
 :- use_module('controllers/weight_spoons_controller.pro').
 :- use_module('controllers/weight_glass_controller.pro').
+:- use_module('controllers/recipes_controller.pro').
 
 :- use_module('speech/interact.pro').
 :- use_module('speech/weights/weight_spoon_speech.pro').
 :- use_module('speech/weights/weight_glass_speech.pro').
+:- use_module('speech/recipes_speech.pro').
 
 parseCommand(_, WordsList, ResultString):-
+
+    phrase(recipes_speech:recipes_all(RecipeNameList), WordsList),
+    core_services:logDebug("Run recipes command"),
+    atomics_to_string(RecipeNameList, " ", RecipeName),
+    normalize_space(atom(RecipeNameNorm), RecipeName),
+    recipes_controller:рецептВесь(RecipeNameNorm, RecipeContent),
+    swritef(ResultString, "Ваш рецепт %w", [RecipeContent]);
+
     phrase(weight_spoon_speech:weightInSpoon(X), WordsList),
     core_services:logDebug("Run weight in spoon command"),
     ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),

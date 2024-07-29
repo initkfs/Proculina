@@ -1,0 +1,4 @@
+appCurrentLanguage: ru
+appMainLoggerLevel: trace
+domainConfigRecipeDir: "data/userdata/recipes"
+domainConfigIngredientsDir: "data/userdata/ingredients"

@@ -17,6 +17,7 @@
 
 :- use_module('app.pro').
 :- use_module('domain/main_command_interpreter.pro').
+:- use_module('domain/main_data_processor.pro').
 
 appDocBrouserPort(5050).
 
@@ -103,6 +104,8 @@ processCli(Opts, _, _, _):-
     % memberchk(cliPermutationsFlag(Command), Opts),
     % main_command_interpreter:writelnPermutations(Command),
     % exit;
+
+    main_data_processor:loadData,
 
     memberchk(cliCommandFlag(Command), Opts),
     main_command_interpreter:interpretCommand(Command, ResultString),

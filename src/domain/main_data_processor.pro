@@ -11,6 +11,8 @@
 :- use_module('./../core/utils/io_util.pro').
 
 :- use_module('./../domain/mind/db/ingredients.pro').
+:- use_module('./../domain/mind/db/weight_glass.pro').
+:- use_module('./../domain/mind/db/weight_spoons.pro').
 
 :- use_module(library(csv)).
 
@@ -54,6 +56,12 @@ addIngredient([IngredRow | Rest]):-
     ingredients:ингредиентДобавить(IngredientName),
     sliceList(IngredData, 0, 2, IngredCasesList),
     ingredients:падежДобавить(IngredientName, IngredCasesList),
+    nth0(3, IngredData, IngredWeigthGlass),
+    weight_glass:стаканГрДобавить(IngredientName, IngredWeigthGlass),
+    nth0(4, IngredData, IngredWeigthSpoon),
+    weight_spoons:ложкаСтоловаяГрДобавить(IngredientName, IngredWeigthSpoon),
+    nth0(5, IngredData, IngredWeigthTeaSpoon),
+    weight_spoons:ложкаЧайнаяГрДобавить(IngredientName, IngredWeigthTeaSpoon),
     addIngredient(Rest).
 
 sliceList(List, FromIndexIncl, ToIndexExcl, Rest):-

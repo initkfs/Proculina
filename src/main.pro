@@ -17,7 +17,6 @@
 
 :- use_module('app.pro').
 :- use_module('domain/main_command_interpreter.pro').
-:- use_module('domain/main_data_processor.pro').
 
 appDocBrouserPort(5050).
 
@@ -80,7 +79,7 @@ main(Argv) :-
     cliOptSpec(Spec),
     optparse:opt_parse(Spec, Argv, Opts, _),
 
-    app:loadAppServices(Logger, Config, I18n),
+    app:runApp(Logger, Config, I18n),
     !,
     
     processCli(Opts, Logger, Config, I18n);
@@ -104,8 +103,6 @@ processCli(Opts, _, _, _):-
     % memberchk(cliPermutationsFlag(Command), Opts),
     % main_command_interpreter:writelnPermutations(Command),
     % exit;
-
-    main_data_processor:loadData,
 
     memberchk(cliCommandFlag(Command), Opts),
     main_command_interpreter:interpretCommand(Command, ResultString),

@@ -9,8 +9,8 @@
 
 dirFileList([]).
 
-dirRegularFiles(DirectoryPath, DirFiles):-
-    absolute_file_name(DirectoryPath, DirectoryFullPath),
+dirRegularFiles(DirectoryPathString, DirFilesArray):-
+    absolute_file_name(DirectoryPathString, DirectoryFullPath),
     directory_files(DirectoryFullPath, Files),
     exclude(=('.'), Files, DirFilesWithoutCurrent),
     exclude(=('..'), DirFilesWithoutCurrent, FileNames),
@@ -18,9 +18,9 @@ dirRegularFiles(DirectoryPath, DirFiles):-
     FilesCount > 0,
     length(ParentPaths, FilesCount),
     maplist(=(DirectoryFullPath), ParentPaths),
-    maplist(buildPathForDir, ParentPaths, FileNames, DirFiles);
-    DirFiles = [].
+    maplist(buildPathForDir, ParentPaths, FileNames, DirFilesArray);
+    DirFilesArray = [].
 
-buildPathForDir(DirPath, FileName, ResultPath):-
-    string_concat(DirPath, "/", NormalizedDir),
-    string_concat(NormalizedDir, FileName, ResultPath).
+buildPathForDir(DirPathString, FileNameString, ResultPathString):-
+    string_concat(DirPathString, "/", NormalizedDirString),
+    string_concat(NormalizedDirString, FileNameString, ResultPathString).

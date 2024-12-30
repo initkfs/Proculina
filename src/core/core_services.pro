@@ -29,9 +29,9 @@ setConfig(Config):-
     throw(error(instantiation_error("The config is already installed"), context(_, _)));
     assertz(mainConfig(Config)).
 
-getConfigValue(KeyString, ConfigValueAtom):-
+getConfigValue(KeyString, ValueAtom):-
     mainConfig(Config),
-    getServiceDictValue(Config, KeyString, ConfigValueAtom).
+    getServiceDictValue(Config, KeyString, ValueAtom).
 
 hasI18n:-
     current_predicate(i18n/1).

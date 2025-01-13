@@ -9,7 +9,7 @@
 
 :- use_module('./../../core/core_services.pro').
 :- use_module('./../../core/loggers/logger.pro').
-:- use_module('./../../app.pro').
+:- use_module('./../app.pro').
 
 :- use_module('./../main_command_interpreter.pro').
 
@@ -36,7 +36,7 @@ tests:-
     testPhrase("сколько сахара содержит ложка", InSpoonSugar20).
 
 main(_) :-
-    app:runApp(_, _, _), !,
+    app:initApp(_, _, _), !,
     (tests -> 
         writeln("All test running"); 
         writeln("Fail test running")),

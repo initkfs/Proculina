@@ -4,13 +4,13 @@
 
 :- use_module(library(yaml)).
 
-:- use_module('core/apps/exceptions.pro').
-:- use_module('core/loggers/logger.pro').
-:- use_module('core/utils/io_util.pro').
-:- use_module('core/core_services.pro').
+:- use_module('./../core/apps/exceptions.pro').
+:- use_module('./../core/loggers/logger.pro').
+:- use_module('./../core/utils/io_util.pro').
+:- use_module('./../core/core_services.pro').
 
-:- use_module('domain/main_command_interpreter.pro').
-:- use_module('domain/main_data_processor.pro').
+:- use_module('main_command_interpreter.pro').
+:- use_module('main_data_processor.pro').
 
 appVersion("0.1a").
 appDocBrouserPort(5050).
@@ -45,10 +45,6 @@ loadConfig(Config):-
     mainConfigFile(ConfigFilePath),
     loadYamlResource(ConfigFilePath, Config).
 
-runApp(Logger, Config, I18n):-
-    loadAppServices(Logger, Config, I18n),
-    loadAppData(Logger, Config, I18n).
-    
 loadAppServices(Logger, Config, I18n):-
     loadConfig(Config),
     core_services:setConfig(Config),
@@ -68,3 +64,7 @@ loadAppServices(Logger, Config, I18n):-
 
 loadAppData(_, _, _):-
     main_data_processor:loadData.
+
+initApp(Logger, Config, I18n):-
+    loadAppServices(Logger, Config, I18n),
+    loadAppData(Logger, Config, I18n).

@@ -5,18 +5,15 @@
 */
 
 :- set_prolog_flag(verbose, silent).
+
 :- initialization(main).
 
 :- use_module(library(optparse)).
-:- use_module(library(yaml)).
 
-:- use_module('core/apps/exceptions.pro').
-:- use_module('core/loggers/logger.pro').
-:- use_module('core/utils/io_util.pro').
+:- use_module('core/utils/app_util.pro').
 :- use_module('core/core_services.pro').
 
-:- use_module('app.pro').
-:- use_module('domain/main_command_interpreter.pro').
+:- use_module('domain/main_domain.pro').
 
 appDocBrouserPort(5050).
 
@@ -27,7 +24,7 @@ cliOptSpec([
         default(false),
         shortflags([h]), 
         longflags([help]), 
-        help('Print help.')
+        help(['Print help.'])
     ],
     
     [
@@ -36,7 +33,7 @@ cliOptSpec([
         default(false),
         shortflags([v]), 
         longflags([version]), 
-        help('Print version.')
+        help(['Print version.'])
     ],
 
     [
@@ -45,7 +42,16 @@ cliOptSpec([
         default(false),
         shortflags([t]), 
         longflags([test]), 
-        help('Run unit tests.')
+        help(['Run unit tests.'])
+    ],
+
+    [
+        opt(cliRunIntegrTestsFlag), 
+        type(boolean),
+        default(false),
+        shortflags([n]), 
+        longflags([ntest]), 
+        help(['Run integrations tests.'])
     ],
     
     [opt(cliDocBrowserFlag),
@@ -53,45 +59,32 @@ cliOptSpec([
         default(false),
         shortflags([b]), 
         longflags([docbrowser]), 
-        help('Run documentation browser.')
-    ],
-
-    [opt(cliCommandFlag), 
-        type(atom), 
-        default(''),
-        shortflags([c]), 
-        longflags([command]), 
-        help('Natural language command for interpretation.')
-    ],
-
-    %Domain commands
-    [opt(cliPermutationsFlag), 
-        type(atom), 
-        default(''),
-        shortflags([p]), 
-        longflags([perm]), 
-        help('Generate permutations to simplify testing.')
+        help(['Run documentation browser.'])
     ]
 ]).
 
 main(Argv) :-
     %set_prolog_flag(double_quotes, chars),
-    cliOptSpec(Spec),
-    optparse:opt_parse(Spec, Argv, Opts, _),
-
-    app:runApp(Logger, Config, I18n),
-    !,
+    cliOptSpec(CoreCliSpec),
+    main_domain:initCli(Argv, CoreCliSpec, AllCliSpec),
     
-    processCli(Opts, Logger, Config, I18n);
-    writeln("Nothing to do. Exit."),
+    optparse:opt_parse(AllCliSpec, Argv, CliOpts, _),
+
+    init(CliOpts, Logger, Config, I18n),
+    run(CliOpts, Logger, Config, I18n);
+
+    writeln(user_error, "Nothing to do. Exit."),
     exit.
 
-processCli(Opts, _, _, _):- 
+init(CliOpts, Logger, Config, I18n):-
+    main_domain:initApp(CliOpts, Logger, Config, I18n), !.
+
+run(Opts, Logger, Config, I18n):- 
     memberchk(cliHelpFlag(true), Opts), 
     printHelp, 
     exit;
     
-    memberchk(cliVersionFlag(true), Opts), 
+    memberchk(cliVersionFlag(true), Opts),
     printVersion, 
     exit;
 
@@ -99,17 +92,10 @@ processCli(Opts, _, _, _):-
     run_tests, 
     exit;
 
-    % FIXME flags
-    % memberchk(cliPermutationsFlag(Command), Opts),
-    % main_command_interpreter:writelnPermutations(Command),
-    % exit;
-
-    memberchk(cliCommandFlag(Command), Opts),
-    main_command_interpreter:interpretCommand(Command, ResultString),
-    writeln(ResultString),
+    main_domain:runApp(Opts, Logger, Config, I18n), 
     exit;
-    
-    memberchk(cliDocBrowserFlag(true), Opts), 
+
+    memberchk(cliDocBrowserFlag(true), Opts),
     runDocServer.
 
 printHelp:-
@@ -119,8 +105,7 @@ printHelp:-
     write(HelpText).
     
 printVersion:-
-    appVersion(Version),
-    writeln(Version).
+    writeln(0).
     
 runDocServer:-
     appDocBrouserPort(Port),
@@ -131,4 +116,4 @@ runDocServer:-
     doc_browser.
 
 exit:-
-    halt.
+    app_util:exitApp.

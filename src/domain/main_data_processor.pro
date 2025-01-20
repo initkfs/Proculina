@@ -11,8 +11,8 @@
 :- use_module('./../core/utils/io_util.pro').
 
 :- use_module('./../domain/mind/db/ingredients.pro').
-:- use_module('./../domain/mind/db/weight_glass.pro').
-:- use_module('./../domain/mind/db/weight_spoons.pro').
+:- use_module('./../domain/mind/questions/weight/glasses/measures/weight_glass.pro').
+:- use_module('./../domain/mind/questions/weight/spoons/weight_spoons.pro').
 
 :- use_module(library(csv)).
 

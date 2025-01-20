@@ -8,8 +8,8 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./../interact.pro').
-:- use_module('./speech_weight.pro').
+:- use_module('./../../../../speech/interact.pro').
+:- use_module('./../../com_weight_speech.pro').
 
 inGlass --> [стакан]; [стакане] ; [стаканчик]; [стаканчике].
 inGlasses --> ([стаканы]; [стаканах]).
@@ -17,6 +17,6 @@ inGlassesQuantity(Quantity) -->
     ([Quantity], inGlasses) ; (inGlasses, [Quantity]).
 
 weightInGlass(X) -->  
-    speech_weight:weightInContainer(X, weight_glass_speech:inGlass).
+    com_weight_speech:weightInContainer(X, weight_glass_speech:inGlass).
 
-weightInGlassQuantity(X, Quantity) -->  speech_weight:weightInContainer(X, weight_glass_speech:inGlassesQuantity(Quantity)).
+weightInGlassQuantity(X, Quantity) -->  com_weight_speech:weightInContainer(X, weight_glass_speech:inGlassesQuantity(Quantity)).

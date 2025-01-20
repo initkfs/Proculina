@@ -1,13 +1,13 @@
 /**
 @author initkfs
 */
-:- module(weight_spoons_controller, [
+:- module(weight_spoon_measure, [
     вСтоловойЛожкеГрамм/2,
     вСтоловойЛожкеГраммГорка/2,
     вЧайнойЛожкеГрамм/2
 ]).
 
-:- use_module('./../db/weight_spoons.pro').
+:- use_module('./../weight_spoons.pro').
 
 вСтоловойЛожкеГрамм(Ингредиент, МассаГрамм):- 
     weight_spoons:ложкаСтоловаяГр(Ингредиент, МассаГрамм).

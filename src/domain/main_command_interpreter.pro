@@ -16,14 +16,12 @@
 
 :- use_module('mind/controllers/ingredients_controller.pro').
 :- use_module('mind/controllers/quantity_controller.pro').
-:- use_module('mind/controllers/weight_spoons_controller.pro').
-:- use_module('mind/controllers/weight_glass_controller.pro').
 :- use_module('mind/controllers/recipes_controller.pro').
 
 :- use_module('mind/speech/interact.pro').
-:- use_module('mind/speech/weights/weight_spoon_speech.pro').
-:- use_module('mind/speech/weights/weight_glass_speech.pro').
 :- use_module('mind/speech/recipes_speech.pro').
+
+:- use_module('mind/questions/weight/weight_questions.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
@@ -47,45 +45,8 @@ parseCommand(_, WordsList, ResultString):-
     normalize_space(atom(RecipeNameNorm), RecipeName),
     recipes_controller:рецептВесь(RecipeNameNorm, RecipeContent),
     swritef(ResultString, "Ваш рецепт %w", [RecipeContent]);
-    
-    phrase(weight_spoon_speech:weightInSpoon(X), WordsList),
-    core_services:logDebug("Run weight in spoon command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В столовой ложке %w грамм %w", [ВесГрамм, РодПадеж]);
-    
-    phrase(weight_spoon_speech:weightInTeaSpoon(X), WordsList),
-    core_services:logDebug("Run weight in tea spoon command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_spoons_controller:вЧайнойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В чайной ложке %w грамм %w", [ВесГрамм, РодПадеж]);
-    
-    phrase(weight_spoon_speech:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
-    core_services:logDebug("Run weight in spoon quantity command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_spoons_controller:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
-    swritef(ResultString, "В %w столовых ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
-    
-    phrase(weight_spoon_speech:weightInTeaSpoonQuantity(X, КоличествоАтом), WordsList),
-    core_services:logDebug("Run weight in tea spoon quantity command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_spoons_controller:вЧайнойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
-    swritef(ResultString, "В %w чайных ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
-    
-    phrase(weight_glass_speech:weightInGlass(X), WordsList),
-    core_services:logDebug("Run weight in glass command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),
-    swritef(ResultString, "В стакане %w грамм %w", [ВесГрамм, РодПадеж]);
-    
-    phrase(weight_glass_speech:weightInGlassQuantity(X, КоличествоАтом), WordsList),
-    core_services:logDebug("Run weight in glass quantity command"),
-    ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
-    weight_glass_controller:вСтаканеГрамм(ИмПадеж, ВесГрамм),
-    quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
-    swritef(ResultString, "В %w стаканах %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
+
+    weight_questions:weightQuestion(WordsList, ResultString);
     
     phrase(interact:questionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).

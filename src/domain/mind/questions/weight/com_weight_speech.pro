@@ -1,7 +1,7 @@
 /** <module> Main command interpreter
 @author initkfs
 */
-:- module(speech_weight, [
+:- module(com_weight_speech, [
     weight/2,
     in/2,
     contains/2,
@@ -19,7 +19,7 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./../interact.pro').
+:- use_module('./../../speech/interact.pro').
 
 weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
 in --> [в].

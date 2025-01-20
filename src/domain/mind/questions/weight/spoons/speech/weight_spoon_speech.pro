@@ -8,8 +8,8 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./../interact.pro').
-:- use_module('./speech_weight.pro').
+:- use_module('./../../../../speech/interact.pro').
+:- use_module('./../../com_weight_speech.pro').
 
 %spoon --> ([ложка] ; [ложечка]).
 %TODO not correct, but simplify
@@ -19,9 +19,9 @@ inSpoonQuantity(Quantity) -->
     ([Quantity], inSpoons) ; (inSpoons, [Quantity]).
 
 weightInSpoon(X) -->  
-    speech_weight:weightInContainer(X, weight_spoon_speech:inSpoon).
+    com_weight_speech:weightInContainer(X, weight_spoon_speech:inSpoon).
 
-weightInSpoonQuantity(X, Quantity) --> speech_weight:weightInContainer(X, weight_spoon_speech:inSpoonQuantity(Quantity)).
+weightInSpoonQuantity(X, Quantity) --> com_weight_speech:weightInContainer(X, weight_spoon_speech:inSpoonQuantity(Quantity)).
 
 inTeaSpoon --> ([чайная],[ложка]); ([чайной],[ложке]) ; ([чайная],[ложечка]); ([чайной],[ложечка]).
 inTeaSpoons --> ([чайных],[ложках]) ; ([чайных],[ложечках]).
@@ -29,6 +29,6 @@ inTeaSpoonQuantity(Quantity) -->
     ([Quantity], inTeaSpoons) ; (inTeaSpoons, [Quantity]).
 
 weightInTeaSpoon(X) -->  
-    speech_weight:weightInContainer(X, weight_spoon_speech:inTeaSpoon).
+    com_weight_speech:weightInContainer(X, weight_spoon_speech:inTeaSpoon).
 
-weightInTeaSpoonQuantity(X, Quantity) --> speech_weight:weightInContainer(X, weight_spoon_speech:inTeaSpoonQuantity(Quantity)).
+weightInTeaSpoonQuantity(X, Quantity) --> com_weight_speech:weightInContainer(X, weight_spoon_speech:inTeaSpoonQuantity(Quantity)).

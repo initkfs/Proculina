@@ -17,9 +17,10 @@
 :- use_module(library(csv)).
 
 loadData:-
-    config_keys_domain:ingredientsDir(ConfigIngredDirAtom),
-    core_services:getConfigValue(ConfigIngredDirAtom, IngredDirString),
-    loadIngredientsDir(IngredDirString).
+    true.
+    % config_keys_domain:ingredientsDir(ConfigIngredDirAtom),
+    % core_services:getConfigValue(ConfigIngredDirAtom, IngredDirString),
+    % loadIngredientsDir(IngredDirString).
    
 loadIngredientsDir(IngredDirString):-
     exists_directory(IngredDirString),

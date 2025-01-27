@@ -11,8 +11,8 @@
 :- use_module('./../core/utils/io_util.pro').
 
 :- use_module('./../domain/expert/ingredients/db/ingredients_all.pro').
-:- use_module('./../domain/expert/questions/weight/glasses/db/weight_glass.pro').
-:- use_module('./../domain/expert/questions/weight/spoons/db/weight_spoons.pro').
+:- use_module('./../domain/expert/weight/glasses/db/weight_glass.pro').
+:- use_module('./../domain/expert/weight/spoons/db/weight_spoons.pro').
 
 :- use_module(library(csv)).
 

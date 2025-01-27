@@ -21,7 +21,7 @@
 :- use_module('expert/common/speech/interact.pro').
 :- use_module('expert/recipes/speech/recipes_speech.pro').
 
-:- use_module('expert/questions/weight/weight_questions.pro').
+:- use_module('expert/weight/weight_questions.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),

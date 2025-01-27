@@ -19,7 +19,7 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./../../common/speech/interact.pro').
+:- use_module('./../common/speech/interact.pro').
 
 weight --> [сколько] ; [количество] ; [вес] ; [масса] ; [объем].
 in --> [в].

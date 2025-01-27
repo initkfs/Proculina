@@ -5,7 +5,7 @@
     
 ]).
 
-:- use_module('./../../../../../core/core_services.pro').
+:- use_module('./../../../../core/core_services.pro').
 :- use_module('./../com_weight_questions.pro').
 
 :- use_module('answers/weight_glass_answer.pro').

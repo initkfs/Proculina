@@ -5,7 +5,7 @@
     
 ]).
 
-:- use_module('./../../ingredients/speech/ingredients_case.pro').
+:- use_module('./../ingredients/speech/ingredients_case.pro').
 
 commonWeightQuestion(SpeechGoal, WordsList, WeightController, ИмПадеж, РодПадеж, WeightOut):-
     phrase(call(SpeechGoal, X), WordsList),

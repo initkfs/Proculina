@@ -9,7 +9,7 @@
     ложкаЧайнаяГр/2
 ]).
 
-:- use_module('./../../../../ingredients/db/ingredients_all.pro').
+:- use_module('./../../../ingredients/db/ingredients_all.pro').
 
 ложкаСтоловаяГрДобавить(Ингредиент, ВесГрАтом):-
     assertz(ложкаСтоловаяГрМасса(Ингредиент, ВесГрАтом)).

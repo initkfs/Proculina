@@ -1,7 +1,7 @@
 /**
 @author initkfs
 */
-:- module(ingredients, [
+:- module(ingredients_all, [
    ингредиент/1,
    ингредиентДобавить/1,
    падежДобавить/2,

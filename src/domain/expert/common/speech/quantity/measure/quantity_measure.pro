@@ -1,13 +1,13 @@
 /**
 @author initkfs
 */
-:- module(quantity_controller, [
+:- module(quantity_measure, [
     wordToQuantity/3,
     wordToQuantity/2,
     weightFromWordQuantity/3
 ]).
 
-:- use_module('./../db/quantity.pro').
+:- use_module('./../db/quantity_num.pro').
 
 wordToQuantity(QuantityWord, QuantityNumber):-
     wordToQuantity(QuantityWord, QuantityNumber, количвоПадежМжРод).

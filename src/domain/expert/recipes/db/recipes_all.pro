@@ -1,7 +1,7 @@
 /**
 @author initkfs
 */
-:- module(recipes, [
+:- module(recipes_all, [
     
 ]).
 

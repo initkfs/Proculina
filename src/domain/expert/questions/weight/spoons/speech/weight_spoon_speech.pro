@@ -8,7 +8,7 @@
 
 :- use_module(library(dcg/basics)).
 
-:- use_module('./../../../../speech/interact.pro').
+:- use_module('./../../../../common/speech/interact.pro').
 :- use_module('./../../com_weight_speech.pro').
 
 %spoon --> ([ложка] ; [ложечка]).

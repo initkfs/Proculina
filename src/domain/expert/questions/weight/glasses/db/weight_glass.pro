@@ -6,7 +6,7 @@
     стаканГр/2
 ]).
 
-:- use_module('./../../../../db/ingredients.pro').
+:- use_module('./../../../../ingredients/db/ingredients_all.pro').
 
 стаканГрДобавить(ИнгредиентАтом, ВесГрАтом):-
    assertz(стаканГрМасса(ИнгредиентАтом, ВесГрАтом)).

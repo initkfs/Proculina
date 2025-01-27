@@ -12,16 +12,16 @@
 :- use_module('./../core/core_services.pro').
 :- use_module('./../core/utils/collection_util.pro').
 :- use_module('main_data_processor.pro').
-:- use_module('mind/controllers/permutation_controller.pro').
+:- use_module('expert/common/speech/permutations/permutation_controller.pro').
 
-:- use_module('mind/controllers/ingredients_controller.pro').
-:- use_module('mind/controllers/quantity_controller.pro').
-:- use_module('mind/controllers/recipes_controller.pro').
+:- use_module('expert/ingredients/speech/ingredients_case.pro').
+:- use_module('expert/common/speech/quantity/measure/quantity_measure.pro').
+:- use_module('expert/recipes/recipes_controller.pro').
 
-:- use_module('mind/speech/interact.pro').
-:- use_module('mind/speech/recipes_speech.pro').
+:- use_module('expert/common/speech/interact.pro').
+:- use_module('expert/recipes/speech/recipes_speech.pro').
 
-:- use_module('mind/questions/weight/weight_questions.pro').
+:- use_module('expert/questions/weight/weight_questions.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),

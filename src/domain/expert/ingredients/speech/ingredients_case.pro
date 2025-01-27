@@ -1,21 +1,21 @@
 /**
 @author initkfs
 */
-:- module(ingredients_controller, [
+:- module(ingredients_case, [
     импадеж/2,
     родпадеж/2,
     имПадежРодПадежДля/3
 ]).
 
-:- use_module('./../db/ingredients.pro').
+:- use_module('./../db/ingredients_all.pro').
 
 импадеж(X, Y):- 
-    ingredients:падеж(PIm, PList),
+    ingredients_all:падеж(PIm, PList),
     memberchk(X, PList),
     Y = PIm.
 
 падежПоИндексу(Индекс, ИмПадеж, НужныйПадеж):-
-    ingredients:падеж(ИмПадеж, СписокПадежей),
+    ingredients_all:падеж(ИмПадеж, СписокПадежей),
     nth0(Индекс, СписокПадежей, НужныйПадеж).
 
 родпадеж(ИмПадеж, РодПадеж):-

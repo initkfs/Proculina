@@ -20,7 +20,7 @@ weightGlassQuestion(WordsList, ResultString):-
     % commonWeightQuestion(weight_glass_speech:weightInGlass, WordsList, weight_glass_measure:вСтаканеГрамм, _, РодПадеж, ВесГрамм).
     % phrase(weight_glass_speech:weightInGlassQuantity(X, КоличествоАтом), WordsList),
     % core_services:logDebug("Run weight in glass quantity command"),
-    % ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
+    % ingredients_case:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     % weight_glass_measure:вСтаканеГрамм(ИмПадеж, ВесГрамм),
-    % quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
+    % quantity_measure:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
     % swritef(ResultString, "В %w стаканах %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]).

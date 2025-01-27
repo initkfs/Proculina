@@ -1,7 +1,7 @@
 /**
 @author initkfs
 */
-:- module(quantity, [
+:- module(quantity_num, [
     количво/2,
     количвоПадежМжРод/2
 ]).

@@ -23,14 +23,14 @@ weightSpoonQuestion(WordsList, ResultString):-
     
     % phrase(weight_spoon_speech:weightInSpoonQuantity(X, КоличествоАтом), WordsList),
     % core_services:logDebug("Run weight in spoon quantity command"),
-    % ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
+    % ingredients_case:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     % weight_spoon_measure:вСтоловойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    % quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
+    % quantity_measure:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
     % swritef(ResultString, "В %w столовых ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]);
     
     % phrase(weight_spoon_speech:weightInTeaSpoonQuantity(X, КоличествоАтом), WordsList),
     % core_services:logDebug("Run weight in tea spoon quantity command"),
-    % ingredients_controller:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
+    % ingredients_case:имПадежРодПадежДля(X, ИмПадеж, РодПадеж),
     % weight_spoon_measure:вЧайнойЛожкеГрамм(ИмПадеж, ВесГрамм),
-    % quantity_controller:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
+    % quantity_measure:weightFromWordQuantity(КоличествоАтом, ВесГрамм, ВесИтог),
     % swritef(ResultString, "В %w чайных ложках %w грамм %w", [КоличествоАтом, ВесИтог, РодПадеж]).

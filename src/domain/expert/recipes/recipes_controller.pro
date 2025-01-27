@@ -5,7 +5,7 @@
     рецептВесь/2
 ]).
 
-:- use_module('./../db/recipes.pro').
+:- use_module('./db/recipes_all.pro').
 
 рецептВесь(Имя, Рецепт):- 
-    recipes:рецепт(Имя, Рецепт).
+    recipes_all:рецепт(Имя, Рецепт).

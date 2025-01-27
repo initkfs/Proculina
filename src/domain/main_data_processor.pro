@@ -10,9 +10,9 @@
 :- use_module('./../core/core_services.pro').
 :- use_module('./../core/utils/io_util.pro').
 
-:- use_module('./../domain/mind/db/ingredients.pro').
-:- use_module('./../domain/mind/questions/weight/glasses/db/weight_glass.pro').
-:- use_module('./../domain/mind/questions/weight/spoons/db/weight_spoons.pro').
+:- use_module('./../domain/expert/ingredients/db/ingredients_all.pro').
+:- use_module('./../domain/expert/questions/weight/glasses/db/weight_glass.pro').
+:- use_module('./../domain/expert/questions/weight/spoons/db/weight_spoons.pro').
 
 :- use_module(library(csv)).
 
@@ -54,9 +54,9 @@ addIngredient([IngredRow | Rest]):-
     IngredRow =.. [row | IngredData],
     nth0(0, IngredData, IngredientName),
     atom(IngredientName),
-    ingredients:ингредиентДобавить(IngredientName),
+    ingredients_all:ингредиентДобавить(IngredientName),
     sliceList(IngredData, 0, 2, IngredCasesList),
-    ingredients:падежДобавить(IngredientName, IngredCasesList),
+    ingredients_all:падежДобавить(IngredientName, IngredCasesList),
     nth0(3, IngredData, IngredWeigthGlass),
     weight_glass:стаканГрДобавить(IngredientName, IngredWeigthGlass),
     nth0(4, IngredData, IngredWeigthSpoon),

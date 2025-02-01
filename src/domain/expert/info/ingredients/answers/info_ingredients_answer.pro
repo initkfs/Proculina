@@ -1,7 +1,7 @@
 /**
 @author initkfs
 */
-:- module(info_about_cul_answer, [
+:- module(info_ingredients_answer, [
     
 ]).
     

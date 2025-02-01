@@ -1,11 +1,11 @@
 /**
 @author initkfs
 */
-:- module(info_about_cul_report, [
+:- module(info_ingredients_report, [
     
 ]).
 
-:- use_module('./../db/info_about_cul.pro').
+:- use_module('./../db/info_ingredients.pro').
 
 infoAboutAll(ИнгредиентАтом, ВсеНюансыТекст):- 
     ВсеНюансыТекст = "Все нюансы".

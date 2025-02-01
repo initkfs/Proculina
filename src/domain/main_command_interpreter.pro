@@ -22,6 +22,7 @@
 :- use_module('expert/recipes/speech/recipes_speech.pro').
 
 :- use_module('expert/weight/weight_questions.pro').
+:- use_module('expert/info_about/info_about_questions.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
@@ -47,6 +48,7 @@ parseCommand(_, WordsList, ResultString):-
     swritef(ResultString, "Ваш рецепт %w", [RecipeContent]);
 
     weight_questions:weightQuestion(WordsList, ResultString);
+    info_about_questions:info_aboutAbout(WordsList, ResultString);
     
     phrase(interact:questionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).

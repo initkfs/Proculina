@@ -6,9 +6,6 @@
 ]).
 
 :- use_module(library(dcg/basics)).
+:- use_module('./../../com_info_speech.pro').
 
-info_any --> [расскажи]; [перечисли]; [доложи].
-info --> [о] ; [об].
-info --> [нюанс] ; [нюансы] ; [нюансе] ; [нюансах].
-
-infoAboutTheme(Theme) --> info_any, info, [Theme].
+infoAboutTheme(Theme) --> com_info_speech:infoAboutAny, [Theme].

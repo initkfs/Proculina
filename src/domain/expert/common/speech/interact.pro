@@ -15,3 +15,13 @@ not --> [не].
 understand --> {random_member(X, [понимаю, 'могу разобрать', 'могу понять', знаю])}, [X].
 thisquestion --> [этот], [вопрос].
 questionNotCorrect --> iam, not, understand, thisquestion.
+
+aboutSimple --> [о].
+
+what --> [что].
+you --> [ты].
+know --> [знаешь]; [слышала] ; [помнишь]; [думаешь].
+whatYouKnowAbout --> what, you, know, aboutSimple.
+
+approvalUnderstand --> {random_member(X, [окей, конечно, ага, да, естественно, разумеется, 'так точно', угу])}, [X].
+approvalTalk --> {random_member(X, [поговорим, расскажу, доложу, поведаю, выскажусь, вспомню, вспомним, 'поделюсь знаниями'])}, [X].

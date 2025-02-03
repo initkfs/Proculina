@@ -12,10 +12,9 @@
 :- use_module('answers/info_ingredients_answer.pro').
 :- use_module('reports/info_ingredients_report.pro').
 
-
 infoAboutIngredient(WordsList, ResultString):-
     phrase(info_ingredients_speech:infoAboutIngredient(ИмПадеж), WordsList),
-    ingredients_case:имПадежВпредлПадеж(Ingredient, ИмПадеж, ПредлПадеж),
+    ingredients_case:имПадежВпредлПадеж(_, ИмПадеж, ПредлПадеж),
     core_services:logDebug("Run info command"),
     info_ingredients_report:infoAboutAll(ИмПадеж, ResultReport),
-    info_ingredients_answer:infoAboutIngredient(ResultString, ПредлПадеж, ResultReport).
+    info_ingredients_answer:answerAboutIngredient(ResultString, ПредлПадеж, ResultReport).

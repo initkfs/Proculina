@@ -4,6 +4,8 @@
 :- module(info_ingredients_answer, [
     
 ]).
+
+:- use_module('./../../com_info_answer.pro').
     
-infoAboutIngredient(ОтветСтрока, РодПадеж, НюансыСтрока):-
-    swritef(ОтветСтрока, "Я знаю о %w следующее. %w", [РодПадеж, НюансыСтрока]).
+answerAboutIngredient(ОтветСтрока, ПредлПадеж, НюансыСтрока):-
+    com_info_answer:answerAboutTheme(ОтветСтрока, ПредлПадеж, НюансыСтрока).

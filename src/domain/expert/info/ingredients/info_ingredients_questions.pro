@@ -16,5 +16,5 @@ infoAboutIngredient(WordsList, ResultString):-
     phrase(info_ingredients_speech:infoAboutIngredient(ИмПадеж), WordsList),
     ingredients_case:имПадежВпредлПадеж(_, ИмПадеж, ПредлПадеж),
     core_services:logDebug("Run info command"),
-    info_ingredients_report:infoAboutAll(ИмПадеж, ResultReport),
-    info_ingredients_answer:answerAboutIngredient(ResultString, ПредлПадеж, ResultReport).
+    info_ingredients_report:infoAboutAll(ИмПадеж, ResultReportList),
+    info_ingredients_answer:answerAboutIngredient(ResultString, ПредлПадеж, ResultReportList).

@@ -10,9 +10,10 @@
 
 answerAbout(Theme) --> interact:approvalTalk, interact:aboutSimple, [Theme].
 
-answerAboutTheme(AnswerString, Theme, Content):-
+answerAboutTheme(AnswerString, Theme, ContentList):-
     phrase(interact:approvalUnderstand, PhraseUndestandList),
     atomic_list_concat(PhraseUndestandList, " ", PhraseUndestandString),
     phrase(com_info_answer:answerAbout(Theme), PhraseResultList),
     atomic_list_concat(PhraseResultList, " ", PhraseResultString),
-    swritef(AnswerString, "%w, %w. %w", [PhraseUndestandString, PhraseResultString, Content]).
+    atomic_list_concat(ContentList, ".", ContentString),
+    swritef(AnswerString, "%w, %w. %w", [PhraseUndestandString, PhraseResultString, ContentString]).

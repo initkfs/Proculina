@@ -7,6 +7,5 @@
 
 :- use_module('./../db/info_ingredients.pro').
 
-infoAboutAll(ИнгредиентАтом, ВсеНюансыСтрока):- 
-    info_ingredients:всеНюансы(ИнгредиентАтом, ВсеНюансыСписок),
-    atomic_list_concat(ВсеНюансыСписок,'.', ВсеНюансыСтрока).
+infoAboutAll(ИнгредиентАтом, ВсеНюансыСписок):- 
+    info_ingredients:всеНюансы(ИнгредиентАтом, ВсеНюансыСписок).

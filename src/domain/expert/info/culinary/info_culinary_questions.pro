@@ -17,5 +17,5 @@ infoAboutTheme(WordsList, ResultString):-
     phrase(info_culinary_speech:infoAboutTheme(ИмПадежТема), WordsList),
     info_culinary:имПадежВпредлПадеж(ИмПадежТема, ИмПадеж, ПредлПадеж),
     core_services:logDebug("Run culinary info command"),
-    info_culinary_report:infoAboutAll(ИмПадеж, ResultReport),
-    info_culinary_answer:answerAboutTheme(ResultString, ПредлПадеж, ResultReport).
+    info_culinary_report:infoAboutAll(ИмПадеж, ResultReportList),
+    info_culinary_answer:answerAboutTheme(ResultString, ПредлПадеж, ResultReportList).

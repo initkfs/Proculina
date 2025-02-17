@@ -24,10 +24,15 @@
 :- use_module('expert/weight/weight_questions.pro').
 :- use_module('expert/info/info_questions.pro').
 
+:- use_module('expert/operating/operating_db.pro').
+
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),
     re_replace("ё", "е", LowerCommand, ReplacedCommand),
     re_replace(",", "", ReplacedCommand, Command),
+
+    % TODO revmoe from commands
+    operating_db:load,
 
     format(string(ReceiveCommandMessage), "Received command for parsing: '~s'", Command),
     core_services:logDebug(ReceiveCommandMessage),

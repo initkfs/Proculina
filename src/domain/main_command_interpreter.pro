@@ -24,7 +24,7 @@
 :- use_module('expert/weight/weight_questions.pro').
 :- use_module('expert/info/info_questions.pro').
 
-:- use_module('expert/operating/operating_db.pro').
+:- use_module('expert/common/operating/operating_db.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
     string_lower(MustBeCommand, LowerCommand),

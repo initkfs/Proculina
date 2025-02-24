@@ -2,3 +2,5 @@ appCurrentLanguage: ru
 appMainLoggerLevel: trace
 domainConfigRecipeDir: "data/userdata/recipes"
 domainConfigIngredientsDir: "data/userdata/ingredients"
+domainConfigOperatingDbFile: "data/db/operating/db.pro"
+domainConfigLongAnswerMinSentences: 15

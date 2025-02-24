@@ -23,5 +23,5 @@ infoAboutTheme(WordsList, ResultString):-
 
 saveThemeOrAnswer(ResultReportList, ResultString, ИмПадежТема, ПредлПадеж):-
     com_info_question:checkCurrentTheme(ИмПадежТема, ResultReportList, NextListItem), 
-    info_culinary_answer:answerAboutTheme(ResultString, ПредлПадеж, [NextListItem]);
-    info_culinary_answer:answerAboutTheme(ResultString, ПредлПадеж, ResultReportList).
+    info_culinary_answer:answerAboutThemeShort(ResultString, ИмПадежТема, ПредлПадеж, [NextListItem]);
+    info_culinary_answer:answerAboutTheme(ResultString, ИмПадежТема, ПредлПадеж, ResultReportList).

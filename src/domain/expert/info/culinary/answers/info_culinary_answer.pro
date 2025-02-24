@@ -7,5 +7,8 @@
 
 :- use_module('./../../com_info_answer.pro').
     
-answerAboutTheme(ОтветСтрока, ПредлПадеж, НюансыСтрока):-
-    com_info_answer:answerAboutTheme(ОтветСтрока, ПредлПадеж, НюансыСтрока).
+answerAboutTheme(ОтветСтрока, ИмПадеж, ПредлПадеж, НюансыСписок):-
+    com_info_answer:answerAboutTheme(ОтветСтрока, ИмПадеж, ПредлПадеж, НюансыСписок).
+
+answerAboutThemeShort(ОтветСтрока,ИмПадеж, ПредлПадеж, НюансыСписок):-
+    com_info_answer:answerAboutThemeShort(ОтветСтрока, ИмПадеж, ПредлПадеж, НюансыСписок).

@@ -6,6 +6,7 @@
 ]).
 
 :- use_module(library(dcg/basics)).
+:- use_module('./../common/speech/com_speech.pro').
 :- use_module('./../common/speech/interact.pro').
 
 answerAbout(Theme) --> interact:approvalTalk, interact:aboutSimple, [Theme].
@@ -18,6 +19,8 @@ answerAboutTheme(AnswerString, _, ThemeAbout, ContentList):-
     atomic_list_concat(ContentList, ".", ContentString),
     swritef(AnswerString, "%w, %w. %w", [PhraseUndestandString, PhraseResultString, ContentString]).
 
-answerAboutThemeShort(AnswerString, Theme, _, ContentList):-
+answerAboutThemeShort(AnswerString, _, ThemeAbout, ContentList):-
     atomic_list_concat(ContentList, ".", ContentString),
-    swritef(AnswerString, "%w. %w", [Theme, ContentString]).
+    com_speech:phraseText(interact:aboutSimple, AboutSimple),
+    com_speech:phraseText(interact:continueTopic, AboutParts),
+    swritef(AnswerString, "%w %w %w. %w", [AboutParts, AboutSimple, ThemeAbout, ContentString]).

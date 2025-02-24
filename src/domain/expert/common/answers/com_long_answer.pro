@@ -7,6 +7,7 @@
 
 :- use_module(library(dcg/basics)).
 :- use_module('./../../../../core/core_services.pro').
+:- use_module('./../speech/com_speech.pro').
 :- use_module('./../speech/interact.pro').
 :- use_module('./../operating/operating_db.pro').
 
@@ -33,7 +34,7 @@ nextThemeItem(ThemeName, ThemeIndex, ThemeList, NextListItem):-
     saveNewTheme(ThemeName, ThemeIndex);
     abolish(operating_db_store:current_theme/2),
     operating_db:reset,
-    nth0(ThemeIndex, ThemeList, NextListItem).
+    com_speech:phraseText(interact:topicEnd, NextListItem).
 
 hasTheme(ThemeName, ThemeIndex):-
     current_predicate(operating_db_store:current_theme/2),

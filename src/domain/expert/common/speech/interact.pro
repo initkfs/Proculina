@@ -18,10 +18,16 @@ questionNotCorrect --> iam, not, understand, thisquestion.
 
 aboutSimple --> [о].
 
+
 what --> [что].
 you --> [ты].
 know --> [знаешь]; [слышала] ; [помнишь]; [думаешь].
 whatYouKnowAbout --> what, you, know, aboutSimple.
+continueTheme --> [далее]; [дальше]; [продолжи].
+thatsNotAll --> [это], [не], [все].
+topicNoToContinue --> [нет], [темы], [для], [продолжения].
+continueTopic --> [отрывок].
+topicEnd --> [всё].
 
 approvalUnderstand --> {random_member(X, [окей, конечно, ага, да, естественно, разумеется, 'так точно', угу])}, [X].
 approvalTalk --> {random_member(X, [поговорим, расскажу, доложу, поведаю, выскажусь, вспомню, вспомним, 'поделюсь знаниями'])}, [X].

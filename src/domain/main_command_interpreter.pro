@@ -24,6 +24,8 @@
 :- use_module('expert/weight/weight_questions.pro').
 :- use_module('expert/info/info_questions.pro').
 
+:- use_module('expert/common/speech/interact.pro').
+:- use_module('expert/common/answers/com_long_answer.pro').
 :- use_module('expert/common/operating/operating_db.pro').
 
 interpretCommand(MustBeCommand, ResultString):-
@@ -52,12 +54,27 @@ parseCommand(_, WordsList, ResultString):-
     recipes_controller:рецептВесь(RecipeNameNorm, RecipeContent),
     swritef(ResultString, "Ваш рецепт %w", [RecipeContent]);
 
+    phrase(interact:continueTheme, WordsList),
+    tryContinueTheme(WordsList, ResultString);
+
     weight_questions:weightQuestion(WordsList, ResultString);
     info_questions:infoAbout(WordsList, ResultString);
     
     phrase(interact:questionNotCorrect, AnswerList),
     atomic_list_concat(AnswerList, " ", ResultString).
     
-
 writelnPermutations(InputString):- 
     permutation_controller:writelnPerms(InputString).
+
+tryContinueTheme(WordsList, ResultString):-
+    com_long_answer:hasTheme(ThemeName, ThemeIndex),
+    continueTheme(WordsList, ThemeName, ThemeIndex, ResultString);
+    phrase(interact:topicNoToContinue, NoTopicList),
+    atomic_list_concat(NoTopicList, " ", ResultString).
+
+continueTheme(WordsList,ThemeName, ThemeIndex, ResultString):- 
+    continueCulinaryTheme(WordsList,ThemeName, ThemeIndex, ResultString).
+    
+continueCulinaryTheme(WordsList,ThemeName, ThemeIndex, ResultString):-
+    ThemeName == готовка,
+    info_questions:continueAboutCulinary(WordsList, ThemeName, ThemeIndex, ResultString).

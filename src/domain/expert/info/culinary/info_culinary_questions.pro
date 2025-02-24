@@ -6,6 +6,7 @@
 ]).
 
 :- use_module('./../../../../core/core_services.pro').
+:- use_module('./../../common/speech/interact.pro').
 
 :- use_module('speech/info_culinary_speech.pro').
 :- use_module('answers/info_culinary_answer.pro').
@@ -13,6 +14,10 @@
 :- use_module('db/info_culinary.pro').
 :- use_module('./../com_info_question.pro').
 
+continueAboutTheme(_, ThemeName, _, ResultString):-
+    info_culinary:имПадежВпредлПадеж(ThemeName, ИмПадеж, ПредлПадеж),
+    info_culinary_report:infoAboutAll(ИмПадеж, ResultReportList),
+    saveThemeOrAnswer(ResultReportList, ResultString, ИмПадеж, ПредлПадеж).
 
 infoAboutTheme(WordsList, ResultString):-
     phrase(info_culinary_speech:infoAboutTheme(Тема), WordsList),
